@@ -1,4 +1,5 @@
 import { View, Text } from 'react-native';
+import styled from 'styled-components/native';
 
 const Movies = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
