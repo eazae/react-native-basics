@@ -28,7 +28,7 @@ export default function App() {
     return <AppLoading startAsync={startLoading} onFinish={onFinish} onError={console.error} />;
   }
 
-  /* #2.14 style-component theme */
+  /* #2.15 style-component theme */
   // Step 3. <ThemeProvider>로 감싸자
   // -> 하위에 있는 component들은 props.theme.(속성name)에 접근이 가능함! (see Movies15.js)
   return (
