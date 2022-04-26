@@ -6,7 +6,7 @@ import Tabs from './navigation/Tabs';
 import Root from './navigation/Root';
 import { NavigationContainer } from '@react-navigation/native';
 // #2.15 import 'ThemeProvider'
-import styled, { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components/native';
 import { useColorScheme } from 'react-native';
 import { darkTheme, lightTheme } from './styled';
 
