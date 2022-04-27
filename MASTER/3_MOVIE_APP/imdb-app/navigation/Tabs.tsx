@@ -45,7 +45,9 @@ const Tabs = () => {
         options={{
           // (Step i-2) hide the header for Tab Nav.
           //// headerShown: false,
-          tabBarIcon: ({ focused, color, size }) => <Ionicons name="film" size={size} color={color} />,
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons name="film" size={size} color={color} />
+          ),
         }}
       />
       <Tab.Screen

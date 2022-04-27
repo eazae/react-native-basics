@@ -13,6 +13,7 @@
     "alwaysStrict": false,
     "strictFunctionTypes": false,
     "strictPropertyInitialization": false,
+    // "baseUrl": "."
   },
   "exclude": [
     "node_modules",

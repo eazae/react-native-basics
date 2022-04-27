@@ -54,7 +54,13 @@ interface SlideProps {
   overview: string;
 }
 
-const Slide: React.FC<SlideProps> = ({ backdrop_path, poster_path, original_title, vote_average, overview }) => {
+const Slide: React.FC<SlideProps> = ({
+  backdrop_path,
+  poster_path,
+  original_title,
+  vote_average,
+  overview,
+}) => {
   const isDark = useColorScheme() === 'dark';
 
   return (
