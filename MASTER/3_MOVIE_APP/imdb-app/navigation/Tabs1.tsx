@@ -1,10 +1,13 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Text, View } from 'react-native';
 import Movies from '../screens/Movies';
 import Search from '../screens/Search';
 import Tv from '../screens/Tv';
 import { useColorScheme } from 'react-native';
 import colors from '../colors';
 import { Ionicons } from '@expo/vector-icons';
+import Stack from './Stack';
+
 const Tab = createBottomTabNavigator();
 
 const Tabs = () => {
@@ -12,6 +15,7 @@ const Tabs = () => {
 
   return (
     <Tab.Navigator
+      //* #3.3 최상단에 일괄적으로 배경색 적용: 'sceneContainerStyle': 모든 screen들을 담고 있는 상위 'Container'의 style
       sceneContainerStyle={{ backgroundColor: isDark ? colors.BLACK : colors.WHITE }}
       screenOptions={{
         tabBarStyle: { backgroundColor: isDark ? colors.BLACK : colors.WHITE },
@@ -28,15 +32,19 @@ const Tabs = () => {
           fontWeight: '600',
           marginTop: -5,
         },
-        /* #3.13 unmount 설정 */
-        // 컴포넌트를 벗어나면(ex. 다른 탭 선택), 그 컴포넌트를 unmount(메모리에서 컴포넌트를 삭제) 시켜주는 설정
-        unmountOnBlur: true,
       }}
     >
       <Tab.Screen
         name="Movies"
+        //// component={Movies}
+        /* #2.12 Step i-2. Render the 'Stack Navigation' */
+        //? 단점) 어떤 Screen들에서는, Tab을 숨기고 싶을수도 있음
+        // component={Stack}
+        /* #2.12 Step ii-3. Make Screen jump between Nav.s (see "Movies12.js") */
         component={Movies}
         options={{
+          // (Step i-2) hide the header for Tab Nav.
+          //// headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons name="film" size={size} color={color} />
           ),
