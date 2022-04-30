@@ -1,6 +1,7 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import styled from 'styled-components/native';
-import { Dimensions, FlatList } from 'react-native';
+import { ActivityIndicator, Dimensions, FlatList, RefreshControl, Text, View } from 'react-native';
+import { useEffect, useState } from 'react';
 import Swiper from 'react-native-swiper';
 import Slide from '../components/Slide';
 import VMedia from '../components/VMedia';
@@ -8,40 +9,40 @@ import HMedia from '../components/HMedia';
 import { useQuery, useQueryClient } from 'react-query';
 import { Movie, MovieResponse, moviesAPI } from '../api';
 import Loader from '../components/Loader';
-import HList from '../components/HList';
 
-// #3.17 see HList.tsx
-//// const ListTitle = styled.Text`
-////   color: white;
-////   font-size: 18px;
-////   font-weight: 600;
-////   margin-left: 30px;
+// see "/components/Loader.tsx"
+//// const Loader = styled.View`
+////   flex: 1;
+////   justify-content: center;
+////   align-items: center;
 //// `;
-//// const VSeparator = styled.View`
-////   width: 20px;
-//// `;
-//// const ListContainer = styled.View`
-////   margin-bottom: 40px;
-//// `;
-//// const TrendingScroll = styled.FlatList`
-////   margin-top: 20px;
-//// ` as unknown as typeof FlatList;
 
-// const ComingSoonTitle = styled(ListTitle)`
-//   margin-bottom: 20px;
-// `;
-
-const ComingSoonTitle = styled.Text`
+const ListTitle = styled.Text`
   color: white;
   font-size: 18px;
   font-weight: 600;
   margin-left: 30px;
+`;
+
+const TrendingScroll = styled.FlatList`
+  margin-top: 20px;
+` as unknown as typeof FlatList;
+
+const ListContainer = styled.View`
+  margin-bottom: 40px;
+`;
+
+const ComingSoonTitle = styled(ListTitle)`
   margin-bottom: 20px;
 `;
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 const movieKeyExtractor = (item: Movie) => item.id + '';
+
+const VSeparator = styled.View`
+  width: 20px;
+`;
 
 const HSeparator = styled.View`
   height: 20px;
@@ -74,6 +75,10 @@ const Movies: React.FC<NativeStackScreenProps<any, 'Movies'>> = ({ navigation: {
   };
 
   return loading ? (
+    //// <Loader>
+    ////   <ActivityIndicator />
+    //// </Loader>
+    // #3.16 컴포넌트로 따로 떼어냄
     <Loader />
   ) : upcomingData ? (
     <FlatList
@@ -101,9 +106,7 @@ const Movies: React.FC<NativeStackScreenProps<any, 'Movies'>> = ({ navigation: {
               />
             ))}
           </Swiper>
-          {/* #3.17 composition 처리: <HList> 컴포넌트 활용 */}
-          {trendingData ? <HList title="Trending Movies" data={trendingData.results} /> : null}
-          {/* <ListContainer>
+          <ListContainer>
             <ListTitle>Trending Movies</ListTitle>
             {trendingData ? (
               <TrendingScroll
@@ -122,7 +125,7 @@ const Movies: React.FC<NativeStackScreenProps<any, 'Movies'>> = ({ navigation: {
                 )}
               />
             ) : null}
-          </ListContainer> */}
+          </ListContainer>
           <ComingSoonTitle>Coming Soon</ComingSoonTitle>
         </>
       )}
